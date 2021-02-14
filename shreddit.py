@@ -13,8 +13,8 @@ import praw
 import settings
 
 # Globals
-SLEEPTIME = 30
-MAXCOUNT = 50
+SLEEPTIME = 60
+MAXCOUNT = 30
 CURRENTCOUNT = 0
 ALLOWEDCHARS = string.ascii_letters + string.punctuation
 
