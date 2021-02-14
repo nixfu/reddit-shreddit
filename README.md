@@ -11,14 +11,20 @@ Program to delete Reddit user post and comments history
  
  To request a complete copy of your entire Reddit user data, [follow the process on this page](https://reddit.zendesk.com/hc/en-us/articles/360043048352-How-do-I-request-a-copy-of-my-Reddit-data-and-information-) and Reddit will process the request and in a few days Reddit will send an archive(zip) of all your Reddit data to your reddit account or to your verified email address.
  
-##### 2. Once the archive of your history data is recieved, copy the following files from the Reddit data archive recieved to the same directroy as where you will be running reddit-shreddit.
+##### 2. Download a copy of reddit-shreddit to your own system.
+
+- Install Python3 if you have not done so.
+- Install the PRAW python libary.  see: https://praw.readthedocs.io/en/latest/getting_started/installation.html
+
+ 
+##### 3. Once the archive of your history data is recieved, copy the following files from the Reddit data archive recieved to the same directroy as where you will be running reddit-shreddit.
  
  * **comments.csv** - if you want to keep some recent history go the bottom of the file and delete anything newer that you want to keep
  * **posts.csv** - same-as-above, remove any you want to keep, such as a some recent activity
  * **saved_comments.csv**  - if this file is present it will skip deleting any comments you "saved" on Reddit
  * **saved_posts.csv** - if this file is present it will skip deleteing any posts that you "saved" on Reddit
  
-##### 3. Create a Reddit API authorization key for your account
+##### 4. Create a Reddit API authorization key for your account
 
 Go to your [Reddit user account app preferences](https://www.reddit.com/prefs/apps). 
 
@@ -39,13 +45,13 @@ Make note of the client ID and client secret. The required information will look
 
 Note: You should NEVER post your client secret (or your reddit password) in public. If you create a bot, you should take steps to ensure that the bot's password and the app's client secret are secured against digital theft. The client IDs, secrets, tokens and passwords used here are, obviously, fake and invalid.
 
-##### 4. Create a settings.py file with the Reddit secrets
+##### 5. Create a settings.py file with the Reddit secrets
 
 Copy the settings.py-EXAMPLE file to settings.py.
 
 Replace the XXXXXX's with your actual Application ClientID/ClientSecret, and Reddit Username/Password.
 
-##### 5. RUN and enjoy the show
+##### 6. RUN and enjoy the show
 
 The program will go through every comment and first fill them in with random characters and re-saving to overwrite, and then it will delete the comment.
 
