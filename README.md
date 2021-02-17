@@ -11,10 +11,10 @@ Program to delete ALL of your Reddit user submissions and comments history on Re
  
  To request a complete copy of your entire Reddit user data, [follow the process on this page](https://reddit.zendesk.com/hc/en-us/articles/360043048352-How-do-I-request-a-copy-of-my-Reddit-data-and-information-) and Reddit will process the request and in a few days Reddit will send an archive(zip) of all your Reddit data to your reddit account or to your verified email address.
  
-##### 2. Download a copy of reddit-shreddit to your own system.
+##### 2. Download a copy of reddit-shreddit to your own system and setup the requirements.
 
 - Install Python3 if you have not done so.
-- Install the PRAW python libary.  see: https://praw.readthedocs.io/en/latest/getting_started/installation.html
+- Install the PRAW python libary, via pip/pip3.  see: https://praw.readthedocs.io/en/latest/getting_started/installation.html
 - Download a copy of reddit-shreddit by clickong on the green CODE button at the top right, and pulling down to download ZIP.
 
  
