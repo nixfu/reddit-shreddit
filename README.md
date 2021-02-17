@@ -67,4 +67,8 @@ After it processes all comments in the comments.csv file, it will delete any pos
 - The program keeps track of each comment it has already processed in a database file.  So it can be ran over again, and will skip items it has already processed.
 
 
-In order to be polite, the processing does 30 items at a time, and then sleeps for 60 seconds before proceding with the next group.  It may take several hours to delete all of your entire comment and post history.
+In order to be polite, the processing does 30 items at a time, and then sleeps for 60 seconds before proceding with the next group.  
+
+It may take several hours to delete all of your entire comment and post history. 
+
+Rough estimate of time it might take.  Assume it takes 90 seconds to process each set of 30 items, there are 86400 in a day / 90 = 960 groups * 30 items = can process about 28800 items per day.
