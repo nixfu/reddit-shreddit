@@ -1,5 +1,5 @@
 # reddit-shreddit
-Program to delete ALL of your Reddit user submissions and comments history
+Program to delete ALL of your Reddit user submissions and comments history on Reddit
 
 *NOTE: This is a python3 program, and requires installing python3, and [installing the required python library (PRAW)](https://praw.readthedocs.io/en/latest/getting_started/installation.html).  You should have some knowledge of how to run python programs before attempting this.*
 
