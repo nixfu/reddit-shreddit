@@ -25,7 +25,7 @@ Program to delete Reddit user post and comments history
  * **saved_comments.csv** (optional) - if this file is present it will skip deleting any comments you "saved" on Reddit
  * **saved_posts.csv** (optional) - if this file is present it will skip deleteing any posts that you "saved" on Reddit
 
-If any of the files are missing, it will just continue with what it has, so for instance if you just wanted to delete comments, just put the comments.csv file in the directory, and it will then have no posts to process and skip it.
+If any of the files are missing, it will just continue with what it has, so for instance if you just wanted to delete comments, just put the comments.csv file in the directory, and it will then have no posts to process and skip that step.
  
 ##### 4. Create a Reddit API authorization key for your account
 
