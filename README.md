@@ -18,7 +18,7 @@ Program to delete Reddit user post and comments history
 - Download a copy of reddit-shreddit by clickong on the green CODE button at the top right, and pulling down to download ZIP.
 
  
-##### 3. Once the archive of your history data is recieved, copy the following files from the Reddit data archive recieved to the same directroy as where you will be running reddit-shreddit.
+##### 3. Once the archive of your history data is recieved from Reddit, copy the following files from the Reddit data archive recieved to the same directroy as where you will be running reddit-shreddit.
  
  * **comments.csv** - if you want to keep some recent history go the bottom of the file and delete anything newer that you want to keep
  * **posts.csv** - same-as-above, remove any you want to keep, such as a some recent activity
