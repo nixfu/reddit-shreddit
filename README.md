@@ -15,6 +15,7 @@ Program to delete Reddit user post and comments history
 
 - Install Python3 if you have not done so.
 - Install the PRAW python libary.  see: https://praw.readthedocs.io/en/latest/getting_started/installation.html
+- Download a copy of reddit-shreddit by clickong on the green CODE button at the top right, and pulling down to download ZIP.
 
  
 ##### 3. Once the archive of your history data is recieved, copy the following files from the Reddit data archive recieved to the same directroy as where you will be running reddit-shreddit.
