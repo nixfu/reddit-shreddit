@@ -81,6 +81,10 @@ You can request that your account data all be removed, and never stored again in
 
 To request your data be deleted from Pushshift.io, go here and follow the directions to add your request to the current "Data Deletion Request Megathread" in the pushshift subreddit: https://www.reddit.com/r/pushshift/
 
+##### 8. The bad news - The bad news is that deleting content on Reddit does not "totally" delete your records.
+
+I used this process to delete 13 years worth of comments and submissions for my account.  I waited a few months, and the requested a new copy of my Reddit data.  What I found is that YES all the comments no longer appeared on the reddit website when viewing them, but my data still contained the links to every comment.  HOWEVER, the shredding(random) data did replace the actual content in Reddits database.   So while reddit in their internal database still has a history of where you commented, this process a) shreds the contents of all your comments, and it b) deletes the comment from the "website" so no one else can ever view it.
+
 # DAILY SHREDDING
 
 Included is also a program for daily shredding, called daily_shreddit.py.  You can run this program as a daily cron job and it will automatically delete and shred any messages/pm's, comments, and submissions that are older than the DELETE_AFTER_DAYS (> days old) in the settings.py.    
