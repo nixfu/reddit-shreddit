@@ -1,5 +1,5 @@
 # reddit-shreddit
-Program to delete ALL of your Reddit user submissions and comments history on Reddit
+Program to delete ALL of your Reddit user submissions and comments history on Reddit, also a daily shredding program to keep your amount of saved user data low.
 
 *NOTE: This is a python3 program, and requires installing python3, and [installing the required python library (PRAW)](https://praw.readthedocs.io/en/latest/getting_started/installation.html).  You should have some knowledge of how to run python programs before attempting this.*
 
@@ -54,7 +54,7 @@ Copy the settings.py-EXAMPLE file to settings.py.
 
 Replace the XXXXXX's with your actual Application ClientID/ClientSecret, and Reddit Username/Password.
 
-##### 6. RUN and enjoy the show
+##### 6. RUN reddit_shreddit.py and enjoy the show
 
 The program will go through every comment and first fill them in with random characters and re-saving to overwrite, and then it will delete the comment.
 
@@ -72,3 +72,8 @@ In order to be polite, the processing does 30 items at a time, and then sleeps f
 It may take several hours to delete all of your entire comment and post history. 
 
 Rough estimate of time it might take.  Assume it takes 90 seconds to process each set of 30 items, there are 86400 in a day / 90 = 960 groups * 30 items = can process about 28800 items per day.
+
+
+# DAILY SHREDDING
+
+Included is also a program for daily shredding, called daily_shreddit.py.  You can run this program as a daily cron job and it will automatically delete and shred any messages/pm's, comments, and submissions that are older than the DELETE_AFTER_DAYS (> days old) in the settings.py.    
