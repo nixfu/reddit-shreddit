@@ -87,9 +87,9 @@ I used this process to delete 13 years worth of comments and submissions for my 
 
 What I found:
 
-Comments -- Yes all the comments no longer appeared on the reddit website when viewing them, but my Reddit data archive still contained the links to every comment.  HOWEVER, the shredding(random) data did replace the actual content in Reddits database.   So while reddit in their internal database still has a history of where you commented, this process a) shreds the contents of all your comments, and it b) deletes the comment from the Reddit website so no one else can ever view it or see that you commented.
+- Comments -- Yes all the comments no longer appeared on the reddit website when viewing them, but my Reddit data archive still contained the links to every comment.  HOWEVER, the shredding(random) data did replace the actual content in Reddits database.   So while reddit in their internal database still has a history of where you commented, this process a) shreds the contents of all your comments, and it b) deletes the comment from the Reddit website so no one else can ever view it or see that you commented.
 
-Posts/Submissions -- The submissions still are contained in your Reddit history.  However, anyone viewing any of the submissions will see that they were deleted and no longer show who submitted them.
+- Posts/Submissions -- The submissions still are contained in your Reddit history.  However, anyone viewing any of the submissions will see that they were deleted and no longer show who submitted them.
 
 
 # DAILY SHREDDING
