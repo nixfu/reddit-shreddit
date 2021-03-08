@@ -54,7 +54,7 @@ Copy the settings.py-EXAMPLE file to settings.py.
 
 Replace the XXXXXX's with your actual Application ClientID/ClientSecret, and Reddit Username/Password.
 
-##### 6. RUN reddit-shreddit.py and enjoy the show
+##### 6. RUN reddit_shreddit.py and enjoy the show
 
 The program will go through every comment and first fill them in with random characters and re-saving to overwrite, and then it will delete the comment.
 
@@ -76,4 +76,4 @@ Rough estimate of time it might take.  Assume it takes 90 seconds to process eac
 
 # DAILY SHREDDING
 
-Included is also a program for daily shredding.  You can run this program as a daily cron job and it will automatically delete and shred any messages/pm's, comments, and submissions that are older than the DELETE_AFTER_DAYS (> days old) in the settings.py.    
+Included is also a program for daily shredding, called daily_shreddit.py.  You can run this program as a daily cron job and it will automatically delete and shred any messages/pm's, comments, and submissions that are older than the DELETE_AFTER_DAYS (> days old) in the settings.py.    
