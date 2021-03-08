@@ -1,5 +1,5 @@
 # reddit-shreddit
-Program to delete ALL of your Reddit user submissions and comments history on Reddit, also a daily shredding program to keep your amount of saved user data low.
+Program to delete ALL of your Reddit user submissions and comments history on Reddit, also a daily shredding program to keep your amount of saved user data low.  (See #8 below for the limitations that apply)
 
 Using programs which parse through the user history prestented by the reddit website/API and reddit.com/user/<myusername> are limted to only the last 1000 items max and will never see anything older than that.  The process documented here is the only known method to delete your entire Reddit history from day one forward to now.
 
