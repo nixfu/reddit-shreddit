@@ -79,8 +79,7 @@ Rough estimate of time it might take.  Assume it takes 90 seconds to process eac
 
 You can request that your account data all be removed, and never stored again in the Pushshift.io database.  This is the database used by services such as removeddit.com and others that normally archive reddit data and allow the viewing of deleted reddit content.
 
-To request your data be deleted from Pushshift.io, go here and follow the directions to add your request to the "deletion megapost" in the pushshift subreddit:
-https://www.reddit.com/r/pushshift/
+To request your data be deleted from Pushshift.io, go here and follow the directions to add your request to the current "Data Deletion Request Megathread" in the pushshift subreddit: https://www.reddit.com/r/pushshift/
 
 # DAILY SHREDDING
 
