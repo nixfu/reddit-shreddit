@@ -75,6 +75,12 @@ It may take several hours to delete all of your entire comment and post history.
 
 Rough estimate of time it might take.  Assume it takes 90 seconds to process each set of 30 items, there are 86400 in a day / 90 = 960 groups * 30 items = can process about 28800 items per day.
 
+##### 7. BONUS - delete your user data from appearing in the popular databases used to see deleted/removed posts
+
+You can request that your account data all be removed, and never stored again in the Pushshift.io database.  This is the database used by services such as removeddit.com and others that normally archive reddit data and allow the viewing of deleted reddit content.
+
+To request your data be deleted from Pushshift.io, go here and follow the directions to add your request to the "deletion megapost" in the pushshift subreddit:
+https://www.reddit.com/r/pushshift/
 
 # DAILY SHREDDING
 
