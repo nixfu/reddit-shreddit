@@ -83,7 +83,14 @@ To request your data be deleted from Pushshift.io, go here and follow the direct
 
 ##### 8. THE BAD NEWS - The bad news is that deleting content on Reddit does not "totally" delete your records in Reddits internal database.
 
-I used this process to delete 13 years worth of comments and submissions for my account.  I waited a few months, and the requested a new copy of my Reddit data.  What I found is that YES all the comments no longer appeared on the reddit website when viewing them, but my data still contained the links to every comment.  HOWEVER, the shredding(random) data did replace the actual content in Reddits database.   So while reddit in their internal database still has a history of where you commented, this process a) shreds the contents of all your comments, and it b) deletes the comment from the Reddit website so no one else can ever view it or see that you commented.
+I used this process to delete 13 years worth of comments and submissions for my account.  I waited a few months, and the requested a new copy of my Reddit data.  
+
+What I found:
+
+Comments -- Yes all the comments no longer appeared on the reddit website when viewing them, but my Reddit data archive still contained the links to every comment.  HOWEVER, the shredding(random) data did replace the actual content in Reddits database.   So while reddit in their internal database still has a history of where you commented, this process a) shreds the contents of all your comments, and it b) deletes the comment from the Reddit website so no one else can ever view it or see that you commented.
+
+Posts/Submissions -- The submissions still are contained in your Reddit history.  However, anyone viewing any of the submissions will see that they were deleted and no longer show who submitted them.
+
 
 # DAILY SHREDDING
 
