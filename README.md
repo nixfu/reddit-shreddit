@@ -72,3 +72,8 @@ In order to be polite, the processing does 30 items at a time, and then sleeps f
 It may take several hours to delete all of your entire comment and post history. 
 
 Rough estimate of time it might take.  Assume it takes 90 seconds to process each set of 30 items, there are 86400 in a day / 90 = 960 groups * 30 items = can process about 28800 items per day.
+
+
+# DAILY SHREDDING
+
+Included is also a program for daily shredding.  You can run this program as a daily cron job and it will automatically delete and shred any messages/pm's, comments, and submissions that are older than the DELETE_AFTER_DAYS (> days old) in the settings.py.    
