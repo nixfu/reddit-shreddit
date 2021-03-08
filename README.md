@@ -54,7 +54,7 @@ Copy the settings.py-EXAMPLE file to settings.py.
 
 Replace the XXXXXX's with your actual Application ClientID/ClientSecret, and Reddit Username/Password.
 
-##### 6. RUN and enjoy the show
+##### 6. RUN reddit-shreddit.py and enjoy the show
 
 The program will go through every comment and first fill them in with random characters and re-saving to overwrite, and then it will delete the comment.
 
