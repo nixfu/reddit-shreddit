@@ -1,13 +1,15 @@
 # reddit-shreddit
 Program to delete ALL of your Reddit user submissions and comments history on Reddit, also a daily shredding program to keep your amount of saved user data low.
 
+Using programs which parse through the user history prestented by the reddit website/API and reddit.com/user/<myusername> are limted to only the last 1000 items max and will never see anything older than that.  The process documented here is the only known method to delete your entire Reddit history from day one forward to now.
+
 *NOTE: This is a python3 program, and requires installing python3, and [installing the required python library (PRAW)](https://praw.readthedocs.io/en/latest/getting_started/installation.html).  You should have some knowledge of how to run python programs before attempting this.*
 
 ## Would you like to delete your ENTIRE post and comment history on Reddit?
 
 #### Here is the process:
 
-##### 1. Request a complete data dodwnload of your user data from Reddit
+##### 1. Request a complete data archive download of your user data from Reddit
  
  To request a complete copy of your entire Reddit user data, [follow the process on this page](https://reddit.zendesk.com/hc/en-us/articles/360043048352-How-do-I-request-a-copy-of-my-Reddit-data-and-information-) and Reddit will process the request and in a few days Reddit will send an archive(zip) of all your Reddit data to your reddit account or to your verified email address.
  
