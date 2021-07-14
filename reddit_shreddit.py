@@ -143,7 +143,7 @@ def run_bot():
 
     if os.path.isfile('saved_comments.csv'):
         logger.info('Read saved_comments.csv')
-        with open('saved_comments.csv', newline='') as fs:
+        with open('saved_comments.csv', newline='', encoding='utf-8') as fs:
             saved_reader = csv.reader(fs)
             for saved_row in saved_reader:
                 if 'id' in saved_row[0]:  # skip heading row
@@ -154,7 +154,7 @@ def run_bot():
 
     if os.path.isfile('comments.csv'):
         logger.info('Read comments.csv')
-        with open('comments.csv', newline='') as fd:
+        with open('comments.csv', newline='', encoding='utf-8') as fd:
             del_reader = csv.reader(fd)
             for del_row in del_reader:
                 if 'id' in del_row[0]:  # skip heading row
@@ -165,7 +165,7 @@ def run_bot():
 
     if os.path.isfile('saved_posts.csv'):
         logger.info('Read saved_posts.csv')
-        with open('saved_posts.csv', newline='') as fs:
+        with open('saved_posts.csv', newline='', encoding='utf-8') as fs:
             saved_reader = csv.reader(fs)
             for saved_row in saved_reader:
                 if 'id' in saved_row[0]:  # skip heading row
@@ -176,7 +176,7 @@ def run_bot():
 
     if os.path.isfile('posts.csv'):
         logger.info('Read posts.csv')
-        with open('posts.csv', newline='') as fd:
+        with open('posts.csv', newline='', encoding='utf-8') as fd:
             del_reader = csv.reader(fd)
             for del_row in del_reader:
                 if 'id' in del_row[0]:  # skip heading row
