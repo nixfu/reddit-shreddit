@@ -17,6 +17,7 @@ SLEEPTIME = 60
 MAXCOUNT = 30
 CURRENTCOUNT = 0
 ALLOWEDCHARS = string.ascii_letters + string.punctuation
+ARCHIVECOMMENTS = 1
 
 #### LOGGING SETUP ### #
 LOGLEVEL = logging.INFO
@@ -97,8 +98,14 @@ def process_comment(comment):
         if comment.author == settings.REDDIT_USERNAME:
             logger.info('+PROCESSING comment: %s %s %s user=%s http://reddit.com%s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(comment.created_utc)), comment.id, len(comment.body), comment.author, comment.permalink))
 
-        # overwrite with random data
+        # save to history file if enabled
+        if ARCHIVECOMMENTS:
+            logger.info("+ARCHIVING COMMENT")
+            f = open("deleted_comment_archive.txt","a")
+            f.write('%s http://reddit.com%s %s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(comment.created_utc)), comment.permalink, comment.body))
+            f.close()
 
+        # overwrite with random data
         if len(comment.body) < 100:
             size = 100
         else:
