@@ -22,6 +22,8 @@ ALLOWEDCHARS = string.ascii_letters + string.punctuation
 
 TODAYNOW = datetime.now()
 
+PROCESSED=0
+
 #### LOGGING SETUP ### #
 LOGLEVEL = logging.INFO
 #LOGLEVEL = logging.DEBUG
@@ -90,8 +92,15 @@ def process_submission(submission):
 
         if submission.author == settings.REDDIT_USERNAME and daysago > settings.DELETE_AFTER_DAYS:
             logger.info('+PROCESSING submission: age=%s %s %s user=%s http://reddit.com%s' % (daysago, subname, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(submission.created_utc)), submission.author, submission.permalink))
+            # save to history file if enabled
+            if settings.ARCHIVE_SUBMISSIONS:
+                logger.info("---ARCHIVING SUBMISSION")
+                f = open("deleted_submisison_archive.txt","a")
+                f.write('%s http://reddit.com%s %s %s %s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(submission.created_utc)), submission.permalink, submission.title, submission.selftext, submission.url))
+                f.close()
             logger.debug('---DELETE')
             submission.delete()
+            PROCESSED=1
             return True
         else:
             logger.debug('+KEEP submission: age=%s %s %s user=%s http://reddit.com%s' % (daysago, subname, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(submission.created_utc)), submission.author, submission.permalink))
@@ -125,8 +134,14 @@ def process_comment(comment):
                        range(randomsize))
             logger.debug('---SHRED %s/%s %s' % (size, randomsize, new_text))
             comment.edit(new_text)
+            if settings.ARCHIVE_COMMENTS:
+                logger.info("---ARCHIVING COMMENT")
+                f = open("deleted_comment_archive.txt","a")
+                f.write('%s http://reddit.com%s %s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(comment.created_utc)), comment.permalink, comment.body))
+                f.close()
             logger.debug('---DELETE')
             comment.delete()
+            PROCESSED=1
             return True
         else:
             logger.debug('+KEEP comment: age=%s %s %s %s user=%s http://reddit.com%s' % (daysago, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(comment.created_utc)), comment.id, len(comment.body), comment.author, comment.permalink))
@@ -142,7 +157,13 @@ def process_message(message):
     daysago = timeago.days
     if daysago > settings.DELETE_AFTER_DAYS:
         logger.info('+DELETE message: age=%s %s %s %s %s subject=(%s) from=(%s) to=(%s)' % (daysago, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(message.created_utc)), message.id, message.was_comment, len(message.body), message.subject, message.author, message.dest))
+        if settings.ARCHIVE_MESSAGES:
+            logger.info("---ARCHIVING MESSAGES")
+            f = open("deleted_message_archive.txt","a")
+            f.write('message: age=%s %s %s comment=%s subject=(%s) from=(%s) to=(%s) %s' % (daysago, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(message.created_utc)), message.id, message.was_comment, len(message.body), message.subject, message.author, message.dest, message.body))
+            f.close()
         message.delete()
+        PROCESSED=1
     else:
         logger.debug('+KEEP message: age=%s %s %s %s %s subject=(%s) from=(%s) to=(%s)' % (daysago, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(message.created_utc)), message.id, message.was_comment, len(message.body), message.subject, message.author, message.dest))
         return False
@@ -160,7 +181,7 @@ def run_bot():
                          password=settings.REDDIT_PASSWORD)
 
     reddit.validate_on_submit = True
-    logger.info('Start bot')
+    logger.info('Start bot - Delete after %s days' % settings.DELETE_AFTER_DAYS)
 
     # create db tables if needed
 
@@ -176,8 +197,17 @@ def run_bot():
                process_message(message)
             
             # process comments
-            logger.info('Looking for comments to delete')
+            logger.info('Looking for comments to delete - new')
             for comment in reddit.redditor(settings.REDDIT_USERNAME).comments.new(limit=None):
+               process_comment(comment)
+            logger.info('Looking for comments to delete - top')
+            for comment in reddit.redditor(settings.REDDIT_USERNAME).comments.top(limit=None):
+               process_comment(comment)
+            logger.info('Looking for comments to delete - hot')
+            for comment in reddit.redditor(settings.REDDIT_USERNAME).comments.hot(limit=None):
+               process_comment(comment)
+            logger.info('Looking for comments to delete - controversial')
+            for comment in reddit.redditor(settings.REDDIT_USERNAME).comments.controversial(limit=None):
                process_comment(comment)
                     
             # process submissions
@@ -199,7 +229,10 @@ def run_bot():
 
         if CURRENTCOUNT == 0:
             logger.info('Nothing to do. Exit')
-            sys.exit(0)
+            if PROCESSED == 1:
+                sys.exit(1)
+            else:
+                sys.exit(0)
 
 
 #### END MAIN PROCEDURE ####

@@ -17,7 +17,8 @@ SLEEPTIME = 60
 MAXCOUNT = 30
 CURRENTCOUNT = 0
 ALLOWEDCHARS = string.ascii_letters + string.punctuation
-ARCHIVECOMMENTS = 1
+
+TOOKACTION = 0
 
 #### LOGGING SETUP ### #
 LOGLEVEL = logging.INFO
@@ -82,8 +83,14 @@ def process_submission(submission):
             return True
         if submission.author == settings.REDDIT_USERNAME:
             logger.info('+PROCESSING submission: %s %s user=%s http://reddit.com%s' % (subname, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(submission.created_utc)), submission.author, submission.permalink))
+            if settings.ARCHIVE_COMMENTS:
+                logger.info("---ARCHIVING SUBMISSION")
+                f = open("deleted_submissions_archive.txt","a")
+                f.write('%s http://reddit.com%s %s %s %s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(submission.created_utc)), submission.permalink, submission.title, submission.selftext, submission.url))
+                f.close()
             logger.debug('---DELETE')
             submission.delete()
+            TOOKACTION=1
     except Exception:
         logger.exception('Unknown Exception in process_submission id=%s, the subreddit is probably banned/deleted.' % submission.id)
         return True
@@ -99,8 +106,8 @@ def process_comment(comment):
             logger.info('+PROCESSING comment: %s %s %s user=%s http://reddit.com%s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(comment.created_utc)), comment.id, len(comment.body), comment.author, comment.permalink))
 
         # save to history file if enabled
-        if ARCHIVECOMMENTS:
-            logger.info("+ARCHIVING COMMENT")
+        if settings.ARCHIVE_COMMENTS:
+            logger.info("---ARCHIVING COMMENT")
             f = open("deleted_comment_archive.txt","a")
             f.write('%s http://reddit.com%s %s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(comment.created_utc)), comment.permalink, comment.body))
             f.close()
@@ -112,7 +119,6 @@ def process_comment(comment):
             size = len(comment.body) + 25
 
         # get random size
-
         randomsize = random.randint(50, size)
         new_text = ''.join(random.choice(ALLOWEDCHARS) for x in
                            range(randomsize))
@@ -120,6 +126,7 @@ def process_comment(comment):
         comment.edit(new_text)
         logger.debug('---DELETE')
         comment.delete()
+        TOOKACTION=1
     except Exception:
         logger.exception('Unknown Exception in process_comment id=%s, the subreddit is probably banned/deleted.' % comment.id)
         return True
@@ -207,8 +214,8 @@ def run_bot():
                 comment = reddit.comment(comment_id)
                 if comment is None:
                     break
-                elif check_processed_sql(str(comment_id)):
-                    continue
+                #elif check_processed_sql(str(comment_id)):
+                #    continue
                 else:
                     process_comment(comment)
                     CURRENTCOUNT += 1
@@ -228,8 +235,8 @@ def run_bot():
                 submission = reddit.submission(id=post_id)
                 if submission is None:
                     break
-                elif check_processed_sql(str(post_id)):
-                    continue
+                #elif check_processed_sql(str(post_id)):
+                #    continue
                 else:
                     process_submission(submission)
                     CURRENTCOUNT += 1
@@ -251,7 +258,10 @@ def run_bot():
 
         if CURRENTCOUNT == 0:
             logger.info('Nothing to do. Exit')
-            sys.exit(0)
+            if TOOKACTION == 0:
+                sys.exit(1)
+            else:
+                sys.exit(0)
 
 
 #### END MAIN PROCEDURE ####
