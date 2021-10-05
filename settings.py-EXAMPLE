@@ -4,4 +4,7 @@ REDDIT_USERNAME = 'xxxxx'
 REDDIT_PASSWORD = 'xxxxxxxxxxxxxx'
 
 # Delete anything after this many days old, else keep
-DELETE_AFTER_DAYS = 20
+DELETE_AFTER_DAYS = 30
+ARCHIVE_COMMENTS = True
+ARCHIVE_MESSAGES = True
+ARCHIVE_SUBMISSIONS = True
