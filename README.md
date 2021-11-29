@@ -17,7 +17,7 @@ Using programs which parse through the user history prestented by the reddit web
 
 - Install Python3 if you have not done so.
 - Install the PRAW python libary, via pip/pip3.  see: https://praw.readthedocs.io/en/latest/getting_started/installation.html
-- Download a copy of reddit-shreddit by clickong on the green CODE button at the top right, and pulling down to download ZIP.
+- Download a copy of reddit-shreddit by clicking on the green CODE button at the top right, and pulling down to download ZIP.
 
  
 ##### 3. Once the archive of your history data is recieved from Reddit, copy the following files from the Reddit data archive recieved to the same directroy as where you will be running reddit-shreddit.
