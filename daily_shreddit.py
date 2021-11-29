@@ -132,8 +132,8 @@ def process_comment(comment):
             randomsize = random.randint(50, size)
             new_text = ''.join(random.choice(ALLOWEDCHARS) for x in
                        range(randomsize))
-            logger.info('---SHREDDING' % (size, randomsize, new_text))
             logger.debug('---SHRED %s/%s %s' % (size, randomsize, new_text))
+            logger.info('---SHREDDED COMMENT')
             comment.edit(new_text)
             if settings.ARCHIVE_COMMENTS:
                 logger.info("---ARCHIVING COMMENT")
