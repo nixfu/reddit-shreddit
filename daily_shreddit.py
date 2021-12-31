@@ -19,9 +19,7 @@ SLEEPTIME = 6
 MAXCOUNT = 30
 CURRENTCOUNT = 0
 ALLOWEDCHARS = string.ascii_letters + string.punctuation
-
 TODAYNOW = datetime.now()
-
 PROCESSED=0
 
 #### LOGGING SETUP ### #
@@ -94,11 +92,11 @@ def process_submission(submission):
             logger.info('+PROCESSING submission: age=%s %s %s user=%s http://reddit.com%s' % (daysago, subname, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(submission.created_utc)), submission.author, submission.permalink))
             # save to history file if enabled
             if settings.ARCHIVE_SUBMISSIONS:
-                logger.info("---ARCHIVING SUBMISSION")
+                logger.debug("---ARCHIVING SUBMISSION")
                 f = open("deleted_submisison_archive.txt","a")
                 f.write('%s http://reddit.com%s %s %s %s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(submission.created_utc)), submission.permalink, submission.title, submission.selftext, submission.url))
                 f.close()
-            logger.debug('---DELETE')
+            logger.info('---DELETE')
             submission.delete()
             PROCESSED=1
             return True
@@ -132,15 +130,16 @@ def process_comment(comment):
             randomsize = random.randint(50, size)
             new_text = ''.join(random.choice(ALLOWEDCHARS) for x in
                        range(randomsize))
+            old_body = comment.body
             logger.debug('---SHRED %s/%s %s' % (size, randomsize, new_text))
-            logger.info('---SHREDDED COMMENT')
+            logger.debug('---SHREDDED COMMENT')
             comment.edit(new_text)
             if settings.ARCHIVE_COMMENTS:
-                logger.info("---ARCHIVING COMMENT")
+                logger.debug("---ARCHIVING COMMENT")
                 f = open("deleted_comment_archive.txt","a")
-                f.write('%s http://reddit.com%s %s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(comment.created_utc)), comment.permalink, comment.body))
+                f.write('%s http://reddit.com%s %s' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(comment.created_utc)), comment.permalink, old_body))
                 f.close()
-            logger.debug('---DELETE')
+            logger.info('---DELETE')
             comment.delete()
             PROCESSED=1
             return True
@@ -161,7 +160,7 @@ def process_message(message):
         if settings.ARCHIVE_MESSAGES:
             logger.info("---ARCHIVING MESSAGES")
             f = open("deleted_message_archive.txt","a")
-            f.write('message: age=%s %s %s comment=%s subject=(%s) from=(%s) to=(%s) %s' % (daysago, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(message.created_utc)), message.id, message.was_comment, len(message.body), message.subject, message.author, message.dest, message.body))
+            f.write('message: age=%s %s %s %s %s subject=(%s) from=(%s) to=(%s)' % (daysago, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(message.created_utc)), message.id, message.was_comment, len(message.body), message.subject, message.author, message.dest))
             f.close()
         message.delete()
         PROCESSED=1
@@ -169,7 +168,6 @@ def process_message(message):
         logger.debug('+KEEP message: age=%s %s %s %s %s subject=(%s) from=(%s) to=(%s)' % (daysago, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(message.created_utc)), message.id, message.was_comment, len(message.body), message.subject, message.author, message.dest))
         return False
  
-
 
 #### MAIN PROCEDURE ####
 
@@ -192,29 +190,43 @@ def run_bot():
     while True:
         CURRENTCOUNT = 0
         try:
+            # get list of saved items
+            SAVED_ITEMS = []
+            logger.info('Getting list of saved items')
+            for saveditem in reddit.user.me().saved(limit=None):
+               if saveditem.author and saveditem.author == settings.REDDIT_USERNAME:
+                  SAVED_ITEMS.append(saveditem.id)
+            logger.info('Found %s saved items' % len(SAVED_ITEMS))
+
             # process messages/pm
             logger.info('Looking for messages/pm to delete')
             for message in reddit.inbox.messages():
-               process_message(message)
+               if not message.id in SAVED_ITEMS:
+                  process_message(message)
             
             # process comments
             logger.info('Looking for comments to delete - new')
             for comment in reddit.redditor(settings.REDDIT_USERNAME).comments.new(limit=None):
-               process_comment(comment)
+               if not comment.id in SAVED_ITEMS:
+                  process_comment(comment)
             logger.info('Looking for comments to delete - top')
             for comment in reddit.redditor(settings.REDDIT_USERNAME).comments.top(limit=None):
-               process_comment(comment)
+               if not comment.id in SAVED_ITEMS:
+                  process_comment(comment)
             logger.info('Looking for comments to delete - hot')
             for comment in reddit.redditor(settings.REDDIT_USERNAME).comments.hot(limit=None):
-               process_comment(comment)
+               if not comment.id in SAVED_ITEMS:
+                  process_comment(comment)
             logger.info('Looking for comments to delete - controversial')
             for comment in reddit.redditor(settings.REDDIT_USERNAME).comments.controversial(limit=None):
-               process_comment(comment)
+               if not comment.id in SAVED_ITEMS:
+                  process_comment(comment)
                     
             # process submissions
             logger.info('Looking for submissions to delete')
             for submission in reddit.redditor(settings.REDDIT_USERNAME).submissions.new(limit=None):
-               process_submission(submission)
+               if not submission.id in SAVED_ITEMS:
+                  process_submission(submission)
                     
        
         except KeyboardInterrupt:
