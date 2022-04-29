@@ -35,7 +35,7 @@ Go to your [Reddit user account app preferences](https://www.reddit.com/prefs/ap
 
 Click the "Create app" or "Create another app" button. Fill out the form like so:
 
-* name: **shreddit**
+* name: **history shredder**
 * App type: Choose the SCRIPT option
 * description: You can leave this blank
 * about url: You can leave this blank
